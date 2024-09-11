@@ -12,9 +12,21 @@
         <a href="../index.html">Back to Home</a>
     </header>
     <main>
-        <input type="text" id="phoneNumber" placeholder="Enter phone number">
-        <input type="text" id="message" placeholder="Enter message">
-        <button id="sendButton">Send Message</button>
+        <div class="form-container">
+            <label for="countryCode">Type your WhatsApp phone number</label>
+            <div class="phone-input">
+                <select id="countryCode"></select>
+                <input type="text" id="phoneNumber" placeholder="Your phone number here">
+            </div>
+            <label for="message">Custom message</label>
+            <div class="message-input">
+                <button id="emojiButton">Add emoji 😊</button>
+                <textarea id="message" placeholder="Add a custom message that users will send to you"></textarea>
+            </div>
+            <button id="previewButton">Preview</button>
+            <p>— or —</p>
+            <button id="generateButton">Generate my wa.link 😎</button>
+        </div>
     </main>
     <script src="../js/tools/whatsapp-direct.js"></script>
 </body>
