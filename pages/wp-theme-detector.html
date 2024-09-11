@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress Theme Detector</title>
+    <link rel="stylesheet" href="/css/wp-theme-detector.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WordPress Theme Detector</h1>
+        <form id="themeForm">
+            <label for="url">Enter WordPress Site URL:</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com" required>
+            <button type="submit">Detect Theme</button>
+        </form>
+        <div id="result">
+            <p id="themeName">Theme Name will appear here.</p>
+            <a id="themeDownloadLink" href="#" style="display: none;" target="_blank">Download Theme</a>
+        </div>
+    </div>
+    <script src="/js/tools/wp-theme-detector.js"></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Shorts Thumbnail Downloader</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #212121;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #ff5733;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 25px;
+            border: 2px solid #ff5733;
+            padding: 5px;
+            background-color: white;
+        }
+
+        input[type="text"] {
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            border-radius: 25px;
+            width: 300px;
+            flex-grow: 1;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e04e2a;
+        }
+
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #downloadLinks {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #imgDlBtn {
+            background-color: #28a745;
+        }
+
+        #imgDlBtn:hover {
+            background-color: #218838;
+        }
+
+        .loading {
+            font-size: 18px;
+            color: #ff5733;
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Shorts Thumbnail Downloader</h1>
+    
+    <div class="input-container">
+        <input type="text" id="shortsInput" placeholder="Enter Shorts Video URL or ID">
+        <button id="downloadBtn">Fetch Thumbnail</button>
+    </div>
+    
+    <div id="thumbnailContainer">
+        <p id="loading-text" class="loading">Loading...</p>
+    </div>
+    
+    <div id="downloadLinks">
+        <button id="imgDlBtn">Download Thumbnail</button>
+    </div>
+    
+    <canvas id="canvas" style="display: none;"></canvas>
+
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', fetchShortsThumbnail);
+        document.getElementById('imgDlBtn').addEventListener('click', handleDownload);
+    
+        async function fetchShortsThumbnail() {
+            const loadingText = document.getElementById('loading-text');
+            loadingText.style.display = 'inline';
+            const input = document.getElementById('shortsInput').value.trim();
+            let videoId = '';
+    
+            try {
+                // Extract video ID from URL or input
+                if (input.includes('youtube.com') || input.includes('youtu.be') || input.includes('shorts')) {
+                    const url = new URL(input);
+                    if (url.hostname === 'youtu.be') {
+                        videoId = url.pathname.substring(1);  // Shortened URL
+                    } else if (url.hostname === 'www.youtube.com' || url.hostname === 'youtube.com') {
+                        if (url.pathname.includes('/shorts/')) {
+                            videoId = url.pathname.split('/shorts/')[1];  // Extract shorts ID
+                        } else {
+                            const params = new URLSearchParams(url.search);
+                            videoId = params.get('v');  // Regular YouTube video
+                        }
+                    }
+                } else {
+                    videoId = input;  // Assume input is video ID
+                }
+    
+                if (!videoId) {
+                    throw new Error('Invalid URL or Video ID');
+                }
+    
+                const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    
+                document.getElementById('thumbnailContainer').innerHTML = `<img src="${thumbnailUrl}" alt="Shorts Thumbnail">`;
+                document.getElementById('downloadLinks').style.display = 'block';
+                loadingText.style.display = 'none';
+            } catch (error) {
+                alert('Invalid URL or Video ID');
+                loadingText.style.display = 'none';
+            }
+        }
+    
+        function handleDownload() {
+            const thumbnailUrl = document.querySelector('#thumbnailContainer img').src;
+            resizeAndDownloadImage(thumbnailUrl);
+        }
+    
+        function resizeAndDownloadImage(url) {
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const image = new Image();
+    
+            image.crossOrigin = 'Anonymous';
+            image.src = url;
+            image.onload = () => {
+                canvas.width = image.width;
+                canvas.height = image.height;
+                context.drawImage(image, 0, 0);
+                const dataUrl = canvas.toDataURL('image/jpeg');
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                link.download = 'shorts-thumbnail.jpg';
+                link.click();
+            };
+        }
+    </script>
+    
+</body>
+</html>

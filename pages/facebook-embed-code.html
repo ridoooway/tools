@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Post Embedder</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #212121;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #f1f1f1;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            height: 100vh;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        input[type="text"],
+        select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin-bottom: 16px;
+            background-color: #444;
+            color: #fff;
+            border: 1px solid #666;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #888;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4267B2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #365899;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .embed-container {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            height: 100px;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #333;
+            color: #eee;
+            border: 1px solid #555;
+            border-radius: 6px;
+            resize: none;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        textarea::placeholder {
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Facebook Post Embedder</h1>
+        <form id="embedForm">
+            <label for="postUrl">Enter Facebook Post URL:</label>
+            <input type="text" id="postUrl" placeholder="https://www.facebook.com/post/..." required>
+            <label for="embedType">Select Embed Type:</label>
+            <select id="embedType" required>
+                <option value="sdk">Facebook SDK Embed</option>
+                <option value="iframe">Iframe Embed</option>
+            </select>
+            <button type="submit">Embed Post</button>
+        </form>
+        <div id="embedContainer" class="embed-container"></div>
+        <textarea id="embedCode" readonly placeholder="Embed code will appear here..."></textarea>
+    </div>
+
+    <!-- Load the Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('embedForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const postUrl = document.getElementById('postUrl').value;
+                const embedType = document.getElementById('embedType').value;
+                const embedContainer = document.getElementById('embedContainer');
+                const embedCodeArea = document.getElementById('embedCode');
+
+                let embedCode = '';
+
+                if (embedType === 'sdk') {
+                    // Generate the embed code using Facebook SDK
+                    embedCode = `<div class="fb-post" data-href="${postUrl}" data-width="500"></div>`;
+
+                    // Inject the embed code into the container
+                    embedContainer.innerHTML = embedCode;
+
+                    // Re-render the Facebook plugin
+                    if (typeof FB !== 'undefined') {
+                        FB.XFBML.parse(embedContainer);
+                    }
+
+                } else if (embedType === 'iframe') {
+                    // Encode the URL for the iframe
+                    const encodedUrl = encodeURIComponent(postUrl);
+                    embedCode = `
+                        <iframe src="https://www.facebook.com/plugins/post.php?href=${encodedUrl}&width=500&show_text=true&height=500" width="500" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                    `;
+
+                    // Inject the embed code into the container
+                    embedContainer.innerHTML = embedCode;
+                }
+
+                // Display the embed code for the user to copy
+                embedCodeArea.value = embedCode.trim();
+            });
+        });
+    </script>
+</body>
+</html>

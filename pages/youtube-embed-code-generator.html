@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Embed Code Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #212121;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1,h3,h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-align: center;
+      color: white;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 16px;
+      color: white;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      max-width: 750px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    input[type="checkbox"] {
+      width: 5%;
+      margin-right: 10px;
+      accent-color: #f73434;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Advanced YouTube Embed Code Generator</h1>
+    <form id="embedForm">
+      <label for="embedUrl">Enter Youtube Video URL or Media Link:</label>
+      <input type="text" id="embedUrl" placeholder="https://youtube.com" required>
+
+      <label for="embedType">Select Embed Type:</label>
+      <select id="embedType" required>
+        <option value="iframe">IFrame</option>
+        <option value="video">Video</option>
+        <option value="audio">Audio</option>
+      </select>
+
+      <label for="width">Width (pixels):</label>
+      <input type="number" id="width" value="560" required>
+
+      <label for="height">Height (pixels):</label>
+      <input type="number" id="height" value="315" required>
+
+      <label for="startTime">Start Video at (seconds):</label>
+      <input type="number" id="startTime" placeholder="Start Time (optional)">
+
+      <label for="endTime">End Video at (seconds):</label>
+      <input type="number" id="endTime" placeholder="End Time (optional)">
+
+      <h3>Advanced Options</h3>
+      <div class="options">
+        <label><input type="checkbox" id="loop"> Loop video</label>
+        <label><input type="checkbox" id="autoplay"> Auto play video</label>
+        <label><input type="checkbox" id="nofullscreen"> No Fullscreen button</label>
+        <label><input type="checkbox" id="nocontrols"> No player controls</label>
+        <label><input type="checkbox" id="modestBranding"> No YouTube logo (modest branding)</label>
+        <label><input type="checkbox" id="privacyEnhanced"> Privacy enhanced (only cookie when user starts video)</label>
+        <label><input type="checkbox" id="responsive"> Responsive (auto scale to available width)</label>
+        <label><input type="checkbox" id="noUnrelated"> Do not show unrelated videos on pause/playback</label>
+        <label><input type="checkbox" id="closedCaptions"> Show closed captions by default</label>
+        <label><input type="checkbox" id="disableFullscreen"> Disable fullscreen button</label>
+        <label><input type="checkbox" id="disableKeyboard"> Disable keyboard control shortcuts</label>
+        <label><input type="checkbox" id="noAutohide"> Do not autohide play bar</label>
+      </div>
+
+      <button type="submit">Generate Embed Code</button>
+    </form>
+
+    <div id="result" class="result">
+      <h2>Generated Embed Code:</h2>
+      <textarea id="embedCode" rows="6" readonly></textarea>
+      <button id="copyButton">Copy to Clipboard</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('embedForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const embedUrl = document.getElementById('embedUrl').value;
+      const embedType = document.getElementById('embedType').value;
+      const width = document.getElementById('width').value;
+      const height = document.getElementById('height').value;
+      const startTime = document.getElementById('startTime').value;
+      const endTime = document.getElementById('endTime').value;
+
+      let embedCode = '';
+
+      let videoParams = '';
+      if (startTime) videoParams += `?start=${startTime}`;
+      if (endTime) videoParams += `${videoParams ? '&' : '?'}end=${endTime}`;
+
+      if (embedType === 'iframe') {
+        embedCode = `<iframe src="${embedUrl}${videoParams}" width="${width}" height="${height}" frameborder="0"`;
+
+        if (document.getElementById('nofullscreen').checked) embedCode += ' allowfullscreen="false"';
+        if (document.getElementById('modestBranding').checked) embedCode += '&modestbranding=1';
+        if (document.getElementById('privacyEnhanced').checked) embedCode += '&rel=0&modestbranding=1&enablejsapi=1';
+        if (document.getElementById('autoplay').checked) embedCode += '&autoplay=1';
+        if (document.getElementById('nocontrols').checked) embedCode += '&controls=0';
+        if (document.getElementById('loop').checked) embedCode += '&loop=1';
+        if (document.getElementById('noUnrelated').checked) embedCode += '&rel=0';
+        if (document.getElementById('closedCaptions').checked) embedCode += '&cc_load_policy=1';
+        if (document.getElementById('disableFullscreen').checked) embedCode += '&fs=0';
+        if (document.getElementById('disableKeyboard').checked) embedCode += '&disablekb=1';
+        if (document.getElementById('noAutohide').checked) embedCode += '&autohide=0';
+        embedCode += `></iframe>`;
+      } else if (embedType === 'video') {
+        embedCode = `<video src="${embedUrl}" width="${width}" height="${height}" controls`;
+
+        if (document.getElementById('loop').checked) embedCode += ' loop';
+        if (document.getElementById('autoplay').checked) embedCode += ' autoplay';
+        if (document.getElementById('nofullscreen').checked) embedCode += ' nofullscreen';
+        embedCode += `></video>`;
+      } else if (embedType === 'audio') {
+        embedCode = `<audio src="${embedUrl}" controls`;
+
+        if (document.getElementById('loop').checked) embedCode += ' loop';
+        if (document.getElementById('autoplay').checked) embedCode += ' autoplay';
+        embedCode += `></audio>`;
+      }
+
+      if (document.getElementById('responsive').checked) {
+        embedCode = `<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+          ${embedCode}
+          </div>`;
+      }
+
+      document.getElementById('embedCode').value = embedCode;
+      document.getElementById('result').style.display = 'block';
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function() {
+      const embedCodeTextarea = document.getElementById('embedCode');
+      embedCodeTextarea.select();
+      document.execCommand('copy');
+      alert('Embed code copied to clipboard!');
+    });
+  </script>
+</body>
+</html>

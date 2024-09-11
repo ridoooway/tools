@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Dislike Viewer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #212121;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 26px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      color: white;
+      
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 25px;
+      background-color: #ff5733;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e74c3c;
+    }
+
+    .result {
+      margin-top: 20px;
+      display: none;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+
+    .video-container {
+      margin: 20px 0;
+    }
+
+    iframe {
+      width: 100%;
+      height: 225px;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+      color: white;
+    }
+
+    .stats p {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>YouTube Dislike Viewer</h1>
+    <div class="form-group">
+      <label for="videoUrl">Enter YouTube Video URL:</label>
+      <input type="text" id="videoUrl" placeholder="e.g., https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+      <button id="fetchDislikes">Fetch Dislikes</button>
+      <p id="error" class="error"></p>
+    </div>
+    <div class="result" id="result">
+      <div class="video-container" id="videoContainer">
+        <!-- YouTube video iframe will be inserted here -->
+      </div>
+      <div class="stats">
+        <p>👍 Likes: <span id="likes">0</span></p>
+        <p>👎 Dislikes: <span id="dislikes">0</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("fetchDislikes").addEventListener("click", function () {
+      const videoUrl = document.getElementById("videoUrl").value.trim();
+      const errorElement = document.getElementById("error");
+      const resultElement = document.getElementById("result");
+      const videoContainer = document.getElementById("videoContainer");
+
+      errorElement.textContent = "";
+      resultElement.style.display = "none";
+      videoContainer.innerHTML = "";
+
+      // Extract the video ID from the YouTube URL
+      const videoId = getYouTubeVideoId(videoUrl);
+
+      if (videoId) {
+        fetch(`https://returnyoutubedislikeapi.com/votes?videoId=${videoId}`)
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById("likes").textContent = data.likes;
+            document.getElementById("dislikes").textContent = data.dislikes;
+
+            // Display the YouTube video iframe
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            videoContainer.appendChild(iframe);
+
+            resultElement.style.display = "block";
+          })
+          .catch(error => {
+            errorElement.textContent = "Error fetching data: " + error;
+          });
+      } else {
+        errorElement.textContent = "Please enter a valid YouTube video URL.";
+      }
+    });
+
+    // Function to extract the YouTube video ID from a URL
+    function getYouTubeVideoId(url) {
+      const regExp = /^.*(youtu\.be\/|v\/|\/u\/\w\/|embed\/|watch\?v=|\&v=|youtu\.be\/|youtube\.com\/shorts\/)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+  </script>
+
+</body>
+
+</html>

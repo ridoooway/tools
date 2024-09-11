@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #121212;
+    color: #E0E0E0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #BB86FC;
+}
+
+a {
+    text-decoration: none;
+    background-color: #03DAC6;
+    color: #121212;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    display: inline-block;
+    margin-top: 15px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+a:hover {
+    background-color: #02cbb5;
+    transform: scale(1.05);
+}
+
+a:active {
+    transform: scale(0.95);
+}
+
+main {
+    background-color: #1E1E1E;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    max-width: 600px; /* Adjusted max-width for better grid layout */
+}
+
+.emoji-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* Creates a responsive grid */
+    gap: 15px; /* Space between grid items */
+}
+
+.emoji-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2A2A2A;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center text inside the emoji-item */
+}
+
+.emoji {
+    font-size: 1.8rem;
+}
+
+.copy-button {
+    background-color: #BB86FC;
+    color: #121212;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+    background-color: #a672e1;
+}
+
+.copy-button:active {
+    background-color: #8f5fb7;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    a {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    .emoji-item {
+        padding: 12px;
+    }
+
+    .emoji {
+        font-size: 1.6rem;
+    }
+
+    .copy-button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    a {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .emoji-item {
+        padding: 8px;
+    }
+
+    .emoji {
+        font-size: 1.4rem;
+    }
+
+    .copy-button {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+    }
+}

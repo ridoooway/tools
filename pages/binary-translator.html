@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Translator</title>
+    <link rel="stylesheet" href="/css/binary-translator.css">
+</head>
+<body>
+    <div class="container">
+       
+        
+        <!-- Binary to Text Section -->
+        <section id="binaryToText">
+            <h2>Binary to Text</h2>
+            <textarea id="binaryInput" placeholder="Enter binary code here"></textarea>
+            <button id="convertBinaryToTextButton">Convert to Text</button>
+            <pre id="textOutput"></pre>
+            <button id="copyTextButton" style="display: none;">Copy Text to Clipboard</button>
+        </section>
+        
+        <!-- Text to Binary Section -->
+        <section id="textToBinary">
+            <h2>Text to Binary</h2>
+            <textarea id="textInput" placeholder="Enter text here"></textarea>
+            <button id="convertTextToBinaryButton">Convert to Binary</button>
+            <pre id="binaryOutput"></pre>
+            <button id="copyBinaryButton" style="display: none;">Copy Binary to Clipboard</button>
+        </section>
+    </div>
+    <script src="/js/tools/binary-translator.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Down Detector</title>
+    <link rel="stylesheet" href="/project/css/website-down-checker.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Website Down Detector</h1>
+        <form id="downDetectorForm">
+            <label for="url">Enter Website URL:</label>
+            <input type="text" id="url" placeholder="https://example.com" required>
+            <button type="submit">Check Status</button>
+        </form>
+        <div id="result">
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Checking...</p>
+            </div>
+            <p id="statusMessage">Result will be shown here.</p>
+        </div>
+    </div>
+    <script src="/project/js/tools/website-down-checker.js"></script>
+</body>
+</html>

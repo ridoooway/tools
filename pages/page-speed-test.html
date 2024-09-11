@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageSpeed Test</title>
+    <link rel="stylesheet" href="/css/page-speed-test.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PageSpeed Test</h1>
+        <form id="pagespeedForm">
+            <label for="url">Enter Website URL:</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com" required>
+            <button type="submit">Test PageSpeed</button>
+        </form>
+        <div id="loading" class="loading"></div>
+        <div id="result">
+            <h2>PageSpeed Results:</h2>
+            <ul id="resultsList">
+                <!-- Results will be displayed here -->
+            </ul>
+        </div>
+    </div>
+    <script src="/js/tools/page-speed-test.js"></script>
+</body>
+</html>

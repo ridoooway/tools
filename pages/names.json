@@ -1,0 +1,45 @@
+{
+    "maleFirstNames": [
+        "John", "Michael", "David", "Chris", "Matthew", "Daniel", "Andrew", "Ryan",
+        "Joshua", "Ethan", "James", "Liam", "Noah", "Oliver", "Elijah", "Lucas",
+        "Mason", "Logan", "Benjamin", "Jacob", "William", "Alexander", "Henry",
+        "Jackson", "Samuel", "Jack", "Aiden", "Owen", "Dylan", "Luke", "Gabriel",
+        "Evan", "Caleb", "Nathan", "Jameson", "Leo", "Maverick", "Lincoln", "Hudson",
+        "Grayson", "Eli", "Jordan", "Parker", "Cooper", "Jaxon", "Connor", "Gavin",
+        "Wyatt", "Landon", "Zachary", "Hunter", "Cameron", "Adam", "Elias", "Max",
+        "Tyler", "Ian", "Austin", "Jake", "Mason", "Sebastian", "Nolan", "Asher",
+        "Dominic", "Jasper", "Ryder", "Leo", "Harrison", "Bryce", "Colton", "Alex"
+    ],
+    "maleLastNames": [
+        "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson",
+        "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin",
+        "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee",
+        "Walker", "Allen", "Young", "Hernandez", "King", "Wright", "Lopez", "Hill",
+        "Scott", "Green", "Adams", "Baker", "Nelson", "Carter", "Mitchell", "Perez",
+        "Sanchez", "Turner", "Cook", "Rogers", "Morgan", "Bell", "Murphy", "Bailey",
+        "Rivera", "Cooper", "Richardson", "Cox", "Howard", "Ward", "Jenkins", "Gray",
+        "James", "Watson", "Brooks", "Kelly", "Sanders", "Price", "Bennett", "Wood",
+        "Barnes", "Ross", "Butler", "Barnett", "Graham", "Fox", "Stone", "Reynolds"
+    ],
+    "femaleFirstNames": [
+        "Jane", "Emily", "Sarah", "Laura", "Katie", "Jessica", "Olivia", "Emma",
+        "Sophia", "Isabella", "Mia", "Avery", "Samantha", "Hannah", "Grace", "Chloe",
+        "Lily", "Ella", "Aria", "Mila", "Zoe", "Charlotte", "Amelia", "Harper",
+        "Evelyn", "Abigail", "Madison", "Aubrey", "Ariana", "Brooklyn", "Bella",
+        "Claire", "Skylar", "Nora", "Sophie", "Addison", "Layla", "Lillian", "Riley",
+        "Scarlett", "Victoria", "Stella", "Hannah", "Ellie", "Lila", "Hazel", "Peyton",
+        "Ruby", "Eleanor", "Katherine", "Alice", "Nora", "Anna", "Samantha", "Holly",
+        "Vivian", "Sierra", "Arianna", "Kylie", "Alyssa", "Maya", "Willow", "Aubrey"
+    ],
+    "femaleLastNames": [
+        "Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson",
+        "Moore", "Taylor", "Anderson", "Thomas", "Jackson", "White", "Harris", "Martin",
+        "Thompson", "Garcia", "Martinez", "Robinson", "Clark", "Rodriguez", "Lewis", "Lee",
+        "Walker", "Allen", "Young", "Hernandez", "King", "Wright", "Lopez", "Hill",
+        "Scott", "Green", "Adams", "Baker", "Nelson", "Carter", "Mitchell", "Perez",
+        "Sanchez", "Turner", "Cook", "Rogers", "Morgan", "Bell", "Murphy", "Bailey",
+        "Rivera", "Cooper", "Richardson", "Cox", "Howard", "Ward", "Jenkins", "Gray",
+        "James", "Watson", "Brooks", "Kelly", "Sanders", "Price", "Bennett", "Wood",
+        "Barnes", "Ross", "Butler", "Barnett", "Graham", "Fox", "Stone", "Reynolds"
+    ]
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Font Detector</title>
+    <link rel="stylesheet" href="/css/website-font-detector.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Website Font Detector</h1>
+        <form id="fontForm">
+            <label for="url">Enter Website URL:</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com" required>
+            <button type="submit">Detect Fonts</button>
+        </form>
+        <div id="loading" class="loading">Loading...</div>
+        <div id="result">
+            <ul id="fontList"></ul>
+        </div>
+    </div>
+    <script src="/js/tools/website-font-detector.js"></script>
+</body>
+</html>
